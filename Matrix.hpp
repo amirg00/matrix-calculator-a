@@ -22,8 +22,8 @@ namespace zich{
         friend istream& operator>>(istream& is, Matrix& matrix);         /* Input Operator */
 
         /* Multiplication Operators */
-        friend Matrix operator*(int scalar, Matrix& matrix);             /* Multiplication of a matrix by scalar */
-        friend Matrix operator*(Matrix& matrix, int scalar);             /* Multiplication of a scalar by a matrix */
+        friend Matrix operator*(int scalar, const Matrix& matrix);       /* Multiplication of a matrix by scalar */
+        friend Matrix operator*(const Matrix& matrix, int scalar);       /* Multiplication of a scalar by a matrix */
 
     private:
         unsigned long _row, _col;
