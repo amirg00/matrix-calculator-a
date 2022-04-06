@@ -22,15 +22,15 @@ namespace zich{
         friend istream& operator>>(istream& is, Matrix& matrix);         /* Input Operator */
 
         /* Multiplication Operators */
-        friend Matrix operator*(int scalar, const Matrix& matrix);       /* Multiplication of a matrix by scalar */
-        friend Matrix operator*(const Matrix& matrix, int scalar);       /* Multiplication of a scalar by a matrix */
+        friend Matrix operator*(double scalar, const Matrix& matrix);    /* Multiplication of a matrix by scalar */
+        friend Matrix operator*(const Matrix& matrix, double scalar);    /* Multiplication of a scalar by a matrix */
 
     private:
-        unsigned long _row, _col;
+        int _row, _col;
         vector<double> _matrix;
     public:
         // Constructor
-        Matrix (vector<double> matrix, unsigned long row, unsigned long col);
+        Matrix (vector<double> matrix, int row, int col);
 
         // Mathematical Operators
         /* Plus Operators */
@@ -49,7 +49,7 @@ namespace zich{
 
         /* Multiplication Operators */
         Matrix operator*(const Matrix &other);       /* Multiplication of a matrix by matrix */
-        Matrix& operator*=(int);                     /* Multiplication of a matrix by scalar insertion */
+        Matrix& operator*=(double scalar);           /* Multiplication of a matrix by scalar insertion */
 
         // Comparison Operators
         bool operator>(const Matrix& other) const;   /* Matrix > Other_Matrix operator  */
