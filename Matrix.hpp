@@ -52,6 +52,6 @@ namespace zich{
         bool operator==(const Matrix& other);        /* Matrix == Other_Matrix operator */
         bool operator!=(const Matrix& other);        /* Matrix != Other_Matrix operator */
 
-        bool compareByOperator(const Matrix&, const Matrix&, const string&) const;
+        static bool compareByOperator(const Matrix&, const Matrix&, const string&) ;
     };
 }
