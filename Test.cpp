@@ -17,12 +17,12 @@ double floatRand(double min, double max);
 // Check cases in which matrices dimension isn't the same.
 // In such cases, an exception should be thrown by definition.
 TEST_CASE("Matrices dimension isn't the same"){
-    srand(time(0)); /* create random generator*/
+    srand(time(0)); /* creates a random generator*/
     int row = 1 + rand() % 100; int row2 = 1 + rand() % 100;
     int col = 1 + rand() % 100; int col2 = 1 + rand() % 100;
+    if (row == row2 && col == col2){row++;}
     vector<double> randVecMat = getRandVecMat(row * col);
     vector<double> randVecMat2 = getRandVecMat(row2 * col2);
-    if (row == row2 && col == col2){row++;}
     Matrix randMat{randVecMat, row, col};
     Matrix OtherRandMat{randVecMat2, row2, col2};
 
@@ -42,6 +42,51 @@ TEST_CASE("Matrices dimension isn't the same"){
 
 TEST_CASE("Comparison Operators"){
 
+    /* Same sum of elements, different elements*/
+    std::vector<double> arr1 = {1.2, 4.8, -0.5, 9, 6, -12, -1, 4, -2};
+    std::vector<double> arr2 = {1, 2.8, -0.5, 9, 7, -10, -0.8, 1, 0};
+    Matrix Mat{arr1, 3, 3};
+    Matrix OtherMat{arr2, 3, 3};
+    Matrix eqMat{arr1, 3, 3};
+
+    CHECK((Mat == eqMat));
+    CHECK((Mat != OtherMat));
+    CHECK((Mat >= OtherMat));
+    CHECK((Mat <= OtherMat));
+    CHECK_FALSE((Mat == OtherMat));
+    CHECK_FALSE((Mat > OtherMat));
+    CHECK_FALSE((Mat < OtherMat));
+
+
+    /* Create random matrices */
+    int row = 1 + rand() % 100;
+    int col = 1 + rand() % 100;
+    cout << row << ", " << col << endl;
+    vector<double> randVecMat = getRandVecMat(row * col);
+    vector<double> OtherRandVecMat = getRandVecMat(row * col);
+
+    /* Sum each matrix */
+    double sumA = 0; double sumB = 0;
+    for(double &element : randVecMat){sumA += element;}
+    for(double &element : OtherRandVecMat){sumB += element;}
+
+    cout << "SUM: ";
+    cout << sumA << ", " << sumB << "\n";
+
+    Matrix randMat{randVecMat, row, col};
+    Matrix expectedRandMat{OtherRandVecMat, row, col};
+
+    /* Checks relations according to the given sums*/
+    if(sumA > sumB){
+        CHECK((randMat > expectedRandMat));
+    }
+    else if (sumA < sumB){
+        CHECK((randMat < expectedRandMat));
+    }
+    else{ // sumA = sumB
+        CHECK((randMat >= expectedRandMat));
+        CHECK((randMat <= expectedRandMat));
+    }
 }
 
 
