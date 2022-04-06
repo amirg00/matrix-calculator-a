@@ -61,7 +61,6 @@ TEST_CASE("Comparison Operators"){
     /* Create random matrices */
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
-    cout << row << ", " << col << endl;
     vector<double> randVecMat = getRandVecMat(row * col);
     vector<double> OtherRandVecMat = getRandVecMat(row * col);
 
@@ -69,9 +68,6 @@ TEST_CASE("Comparison Operators"){
     double sumA = 0; double sumB = 0;
     for(double &element : randVecMat){sumA += element;}
     for(double &element : OtherRandVecMat){sumB += element;}
-
-    cout << "SUM: ";
-    cout << sumA << ", " << sumB << "\n";
 
     Matrix randMat{randVecMat, row, col};
     Matrix expectedRandMat{OtherRandVecMat, row, col};
@@ -94,7 +90,7 @@ TEST_CASE("Increment - Decrement Matrix"){
     /* Create random matrix */
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
-    cout << row << ", " << col << endl;
+
     vector<double> randVecMat = getRandVecMat(row * col);
     Matrix randMat{randVecMat, row, col};
 
@@ -136,7 +132,7 @@ TEST_CASE("Unary Operations"){
     /* Create random matrix */
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
-    cout << row << ", " << col << endl;
+
     vector<double> randVecMat = getRandVecMat(row * col);
     Matrix randMat{randVecMat, row, col};
     CHECK((+randMat == randMat));
@@ -156,7 +152,7 @@ TEST_CASE("Scalar Multiplication"){
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
     double scalar = round(floatRand(-100, 100) * 100.0) / 100.0;
-    cout << row << ", " << col << endl;
+
     vector<double> randVecMat = getRandVecMat(row * col);
     vector<double> randVecMatCopy(randVecMat);
 
@@ -249,9 +245,7 @@ vector<double> getRandVecMat(int size){
 Matrix getRandMatrix(){
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
-    cout << row << ", " << col << endl;
     vector<double> randVecMat = getRandVecMat(row * col);
-    cout << randVecMat.size() << endl;
     Matrix randMat{randVecMat, row, col};
     return randMat;
 }
