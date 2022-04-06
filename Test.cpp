@@ -18,8 +18,13 @@ double floatRand(double min, double max);
 // In such cases, an exception should be thrown by definition.
 TEST_CASE("Matrices dimension isn't the same"){
     srand(time(0)); /* create random generator*/
-    Matrix randMat = getRandMatrix();
-    Matrix OtherRandMat = getRandMatrix();
+    int row = 1 + rand() % 100; int row2 = 1 + rand() % 100;
+    int col = 1 + rand() % 100; int col2 = 1 + rand() % 100;
+    vector<double> randVecMat = getRandVecMat(row * col);
+    vector<double> randVecMat2 = getRandVecMat(row2 * col2);
+    if (row == row2 && col == col2){row++;}
+    Matrix randMat{randVecMat, row, col};
+    Matrix OtherRandMat{randVecMat2, row2, col2};
 
     CHECK_THROWS(randMat + OtherRandMat);
     CHECK_THROWS(randMat += OtherRandMat);
@@ -170,13 +175,17 @@ TEST_CASE("Print Random Matrix"){
 
 
 
-
+// Function creates a random float number in range [min, max].
+// Returns the random number.
 double floatRand(double min, double max)
 {
     double randFloat = (double)rand() / RAND_MAX;
     return min + randFloat * (max - min);
 }
 
+// Function gets a vector size.
+// Creates a random vector with negative/positive double elements.
+// Finally, returns the random vector.
 vector<double> getRandVecMat(int size){
     vector<double> randVecMat;
     for (int i = 0; i < size; i++){
@@ -186,6 +195,7 @@ vector<double> getRandVecMat(int size){
     return randVecMat;
 }
 
+// Function creates a random matrix and returns it.
 Matrix getRandMatrix(){
     int row = 1 + rand() % 100;
     int col = 1 + rand() % 100;
