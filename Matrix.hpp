@@ -13,16 +13,24 @@ using namespace std;
 
 namespace zich{
     class Matrix{
+
+        /**************************************************/
+        //================== Friend Functions =============/
+        /**************************************************/
+        /* Input & Output Operators */
+        friend ostream& operator<<(ostream& os, const Matrix& matrix);   /* Output Operator */
+        friend istream& operator>>(istream& is, Matrix& matrix);         /* Input Operator */
+
+        /* Multiplication Operators */
+        friend Matrix operator*(int scalar, Matrix& matrix);             /* Multiplication of a matrix by scalar */
+        friend Matrix operator*(Matrix& matrix, int scalar);             /* Multiplication of a scalar by a matrix */
+
     private:
         unsigned long _row, _col;
         vector<double> _matrix;
     public:
         // Constructor
         Matrix (vector<double> matrix, unsigned long row, unsigned long col);
-
-        /* Input & Output Operators */
-        friend ostream& operator<<(ostream& os, const Matrix& matrix);   /* Output Operator */
-        friend istream& operator>>(istream& is, Matrix& matrix);         /* Input Operator */
 
         // Mathematical Operators
         /* Plus Operators */
@@ -40,7 +48,6 @@ namespace zich{
         Matrix operator--(int);                      /* Postfix decrement matrix by 1 */
 
         /* Multiplication Operators */
-        Matrix operator*(int);                       /* Multiplication of a matrix by scalar */
         Matrix operator*(const Matrix &other);       /* Multiplication of a matrix by matrix */
         Matrix& operator*=(int);                     /* Multiplication of a matrix by scalar insertion */
 
