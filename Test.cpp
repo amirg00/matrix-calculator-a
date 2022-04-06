@@ -122,6 +122,14 @@ TEST_CASE("Increment - Decrement Matrix"){
     for (double &element : randVecMatCopy) {++element;}
     Matrix expectedRandMat5{randVecMatCopy, row, col};
     CHECK((++randMat == expectedRandMat5));
+
+    /* Check '+=' operation*/
+    CHECK_NOTHROW((randMat += expectedRandMat5));
+    CHECK((randMat == 2*expectedRandMat5));
+
+    /* Check '-=' Operation*/
+    CHECK_NOTHROW((randMat -= expectedRandMat5));
+    CHECK((randMat == 1*expectedRandMat5));
 }
 
 TEST_CASE("Unary Operations"){
@@ -216,9 +224,6 @@ TEST_CASE("Print Random Matrix"){
     Matrix mat = getRandMatrix();
     CHECK_NOTHROW(cout << mat << '\n');
 }
-
-
-
 
 // Function creates a random float number in range [min, max].
 // Returns the random number.
